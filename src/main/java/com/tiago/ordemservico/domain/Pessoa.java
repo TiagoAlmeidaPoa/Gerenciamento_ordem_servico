@@ -2,7 +2,7 @@ package com.tiago.ordemservico.domain;
 
 import java.util.Objects;
 
-public class Pessoa {
+public abstract class Pessoa {
 
 	private Integer id;
 	private String nome;
