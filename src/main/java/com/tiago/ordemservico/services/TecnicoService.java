@@ -3,6 +3,8 @@ package com.tiago.ordemservico.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,6 +45,20 @@ public class TecnicoService {
 			return obj;
 		}
 		return null;
+	}
+
+	public Tecnico update(Integer id, @Valid TecnicoDTO objDto) {
+		Tecnico oldObj = findById(id);
+		
+		if(findByCPF(objDto) != null && findByCPF(objDto).getId() != id) {
+			throw new DataIntegratyViolationException("CPF já cadastrado na base de dados!");
+		}
+		
+		oldObj.setCpf(objDto.getCpf());
+		oldObj.setNome(objDto.getNome());
+		oldObj.setTelefone(objDto.getTelefone());
+		
+		return tecnicoRepository.save(oldObj);
 	}
 
 }
