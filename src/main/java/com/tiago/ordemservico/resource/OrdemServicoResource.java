@@ -1,5 +1,8 @@
 package com.tiago.ordemservico.resource;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +24,14 @@ public class OrdemServicoResource {
 	public ResponseEntity<OrdemServicoDTO> findById(@PathVariable Integer id){
 		OrdemServicoDTO objDTO = new OrdemServicoDTO(service.findById(id));
 		return ResponseEntity.ok().body(objDTO);
+	}
+	
+	@GetMapping
+	public ResponseEntity<List<OrdemServicoDTO>> findAll(){
+		List<OrdemServicoDTO> listaDTO = service.findAll().stream().map(obj -> new OrdemServicoDTO(obj))
+				.collect(Collectors.toList());
+
+		return ResponseEntity.ok().body(listaDTO);
 	}
 
 }
