@@ -3,6 +3,8 @@ package com.tiago.ordemservico.dtos;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import javax.validation.constraints.NotEmpty;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.tiago.ordemservico.domain.OrdemServico;
 
@@ -10,14 +12,16 @@ public class OrdemServicoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
-	
-	@JsonFormat( pattern = "dd/MM/yyyy HH:mm" )
+
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private LocalDateTime dataAbertura;
-	
-	@JsonFormat( pattern = "dd/MM/yyyy HH:mm" )
+
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private LocalDateTime dataFechamento;
-	
+
 	private Integer prioridade;
+
+	@NotEmpty(message = "O campo Observacoes é requerido")
 	private String Observacoes;
 	private Integer status;
 	private Integer tecnico;

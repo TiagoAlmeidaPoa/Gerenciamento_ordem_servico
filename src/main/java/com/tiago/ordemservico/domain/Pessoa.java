@@ -11,14 +11,14 @@ import javax.persistence.Id;
 import org.hibernate.validator.constraints.br.CPF;
 
 @Entity
-public abstract class Pessoa implements Serializable{
+public abstract class Pessoa implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue( strategy = GenerationType.IDENTITY )
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	
+
 	@CPF
 	private String cpf;
 	private String telefone;
