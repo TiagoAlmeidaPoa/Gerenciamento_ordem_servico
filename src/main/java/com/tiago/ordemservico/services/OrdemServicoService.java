@@ -1,5 +1,6 @@
 package com.tiago.ordemservico.services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,6 +44,11 @@ public class OrdemServicoService {
 		return fromDTO(obj);
 	}
 
+	public OrdemServico update(@Valid OrdemServicoDTO obj) {
+		findById(obj.getId());
+		return fromDTO(obj);
+	}
+
 	public OrdemServico fromDTO(OrdemServicoDTO obj) {
 		OrdemServico newObj = new OrdemServico();
 		newObj.setId(obj.getId());
@@ -55,6 +61,10 @@ public class OrdemServicoService {
 
 		newObj.setTecnico(tec);
 		newObj.setCliente(cli);
+		
+		if(newObj.getStatus().getCod() == 2) {
+			newObj.setDataFechamento(LocalDateTime.now());
+		}
 
 		return ordemServicoRepository.save(newObj);
 	}
