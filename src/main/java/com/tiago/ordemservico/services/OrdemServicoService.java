@@ -12,8 +12,6 @@ import org.springframework.stereotype.Service;
 import com.tiago.ordemservico.domain.Cliente;
 import com.tiago.ordemservico.domain.OrdemServico;
 import com.tiago.ordemservico.domain.Tecnico;
-import com.tiago.ordemservico.domain.enums.Prioridade;
-import com.tiago.ordemservico.domain.enums.Status;
 import com.tiago.ordemservico.dtos.OrdemServicoDTO;
 import com.tiago.ordemservico.repository.OrdemServicoRepository;
 import com.tiago.ordemservico.services.exceptions.ObjectNotFoundException;
@@ -53,8 +51,8 @@ public class OrdemServicoService {
 		OrdemServico newObj = new OrdemServico();
 		newObj.setId(obj.getId());
 		newObj.setObservacoes(obj.getObservacoes());
-		newObj.setPrioridade(Prioridade.toEnum(obj.getPrioridade()));
-		newObj.setStatus(Status.toEnum(obj.getStatus()));
+		newObj.setPrioridade(obj.getPrioridade());
+		newObj.setStatus(obj.getStatus());
 
 		Tecnico tec = tecnicoService.findById(obj.getTecnico());
 		Cliente cli = clienteService.findById(obj.getCliente());
